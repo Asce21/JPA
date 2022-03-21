@@ -1,0 +1,24 @@
+changes_20220319 - Initial Commit
+
+books.java
+- Added 2 composite uniwue constraints
+
+publishers.java
+- Added and populated with member variables, getters, setters, and a toString method
+- Added annotations to each member variable
+- Added a uniwue constraint in the columns of both email and phone
+
+books.java
+- Added and populated with member variables, getters, setters, and a toString method
+- Added annotations to each member variable
+- Created a link between this class and authoring_entities
+- Created a link between this and publishers
+
+
+For the database:
+URL: jdbc:derby:database/Books;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]

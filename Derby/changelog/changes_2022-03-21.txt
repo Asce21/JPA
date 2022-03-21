@@ -1,0 +1,15 @@
+changes_2022-03-21
+
+
+ad_hoc_teams_members.java
+- Changed columns so that they map to authoring_entities
+
+authoring_entities
+- Added columns to map to ad_hoc_teams_members
+
+bookss.java
+- renamed books.java to bookss.java
+- The reason for the exta 's' in the class name is to differentiate it from the project name.
+
+ad_hoc_teams_members_id
+- I changed this attributes to be of type String. That worked, for some reason

@@ -33,7 +33,6 @@ public class publishers {
     }//End of the overloaded constructor
 
     //Getters & Setters
-
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
     public String getEmail() {return email;}

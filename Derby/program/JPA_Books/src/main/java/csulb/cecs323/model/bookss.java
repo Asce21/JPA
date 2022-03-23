@@ -16,9 +16,6 @@ public class bookss {
     @Column(nullable = false, length = 80)
     private String title;
 
-    @Column
-    private int authoring_entity_name ;
-
     //This variable serves as the link to authoring_entities
     @ManyToOne
     @JoinColumn(name = "author_entity_name",referencedColumnName = "email", nullable = false)
@@ -31,11 +28,10 @@ public class bookss {
 
     //Constructors
     public bookss()  {}
-    public bookss(String initIsbn, String initTitle, int initAuthoring_entity_name, authoring_entities initAuthoringEntity, publishers initBookPublisher) {
+    public bookss(String initIsbn, String initTitle, authoring_entities initAuthoring_entity_name, publishers initBookPublisher) {
         this.isbn = initIsbn;
         this.title = initTitle;
-        this.authoring_entity_name = initAuthoring_entity_name;
-        this.authoringEntity = initAuthoringEntity;
+        this.authoringEntity = initAuthoring_entity_name;
         this.bookPublisher = initBookPublisher;
     }//End of the overloaded constructor
 
@@ -44,8 +40,6 @@ public class bookss {
     public void setIsbn(String isbn) {this.isbn = isbn;}
     public String getTitle() {return title;}
     public void setTitle(String title) {this.title = title;}
-    public int getAuthoring_entity_name() {return authoring_entity_name;}
-    public void setAuthoring_entity_name(int authoring_entity_name) {this.authoring_entity_name = authoring_entity_name;}
     public authoring_entities getAuthoringEntity() {return authoringEntity;}
     public void setAuthoringEntity(authoring_entities authoringEntity) {this.authoringEntity = authoringEntity;}
     public publishers getBookPublisher() {return bookPublisher;}

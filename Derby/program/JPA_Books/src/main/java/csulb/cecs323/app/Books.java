@@ -77,18 +77,72 @@ public class Books {
       List <authoring_entities> authoringEntitiesList = new ArrayList<>();
       List <publishers> publisherssList = new ArrayList<>();
       List <bookss> bookssList = new ArrayList<>();
-      List <authoring_entities> adHocTeamMembersList = new ArrayList<>();
-      // Load up my List with the Entities that I want to persist.  Note, this does not put them
-      // into the database.
-      authoringEntitiesList.add(new authoring_entities("stephen.king@gmail.com", "Individual Author", "Stephen King",
-              "Stephen King", 1976));
+      List <ad_hoc_teams_members> adHocTeamMembersList = new ArrayList<>();
+
+      // Load up my Lists with the Entities that I want to persist.  Note, this does not put them into the database.
       authoringEntitiesList.add(new authoring_entities("bg@gmail.com", "Writing Group", "Bloomsbury Group",
               "Virginia Wool", 1950));
+      authoringEntitiesList.add(new authoring_entities("dill.pickle@gmail.com", "Writing Group", "Dill Pickle Club",
+              "Sherwood Anderson", 1917));
+      authoringEntitiesList.add(new authoring_entities("los-contemp@yahoo.com", "Writing Group", "Los Contemporáneos",
+              " José Gorostiza", 1920));
+      authoringEntitiesList.add(new authoring_entities("the.inlings@yahoo.com", "Writing Group", "The Inklings",
+              "J. R. R. Tolkien", 1934));
+      authoringEntitiesList.add(new authoring_entities("tDymockp@gmail.com", "Writing Group", "The Dymock Poets\n",
+              "Lascelles Abercrombie", 1915));
+      authoringEntitiesList.add(new authoring_entities("tar@aol.com", "Writing Group", "The Algonquin Roundtable\n",
+              "John Peter Toohey", 1919));
+      authoringEntitiesList.add(new authoring_entities("soO@mail.me", "Writing Group", "Stratford-on-Odeon",
+              "Sylvia Beach", 1919));
+      authoringEntitiesList.add(new authoring_entities("the-factory@aol.com", "Writing Group", "The Factory",
+              " Andy Warhol", 1962));
+      authoringEntitiesList.add(new authoring_entities("N/A", "Writing Group", "The Socrates School",
+              "Socrates", -400));
+      authoringEntitiesList.add(new authoring_entities("the.february.house@yahoo.com", "Writing Group", "The February House",
+              "W.H. Auden", 1940));
+      authoringEntitiesList.add(new authoring_entities("stephen.king@gmail.com", "Stephen King", 1976));
+      authoringEntitiesList.add(new authoring_entities("de@gmail.com", "David Eddings", 1931));
+      authoringEntitiesList.add(new authoring_entities("leigh@gmail.com", "Leigh Eddings", 1937));
+      authoringEntitiesList.add(new authoring_entities("ernestH@gmail.com", "Ernest Hemingway", 1899));
+      authoringEntitiesList.add(new authoring_entities("jj@yahoo.com", "James Joyce", 1882));
+      authoringEntitiesList.add(new authoring_entities("Ezra-Pound@yahoo.com", "Ezra Pound", 1885));
+      authoringEntitiesList.add(new authoring_entities("Gertrude-Stein@mail.me", "Gertrude Stein", 1874));
+      authoringEntitiesList.add(new authoring_entities("Fitzgerald@gmail.com", "F. Scott Fitzgerald", 1896));
+      authoringEntitiesList.add(new authoring_entities("warhol@aol.com", "Andy Warhol", 1928));
+      authoringEntitiesList.add(new authoring_entities("david.leigh@yahoo.com.com", "Ad Hoc Team", "David & Leigh Eddings",
+              "Virginia Wool", 1950));
+      authoringEntitiesList.add(new authoring_entities("harperlee@gmail.com", "Harper Lee", 1926));
+
+      publisherssList.add(new publishers("Spectrum Literary Agency, Inc.", "general@spectrumliteraryagency.com", "212-362-4323"));
+      publisherssList.add(new publishers("Random House Publishing Group", "main@randomhousebooks.com", "800-726-0600"));
+      publisherssList.add(new publishers("scribner", "me@scribner.com", "212-751-2600"));
+      publisherssList.add(new publishers("Simon & Brown", "N/A", "N/A"));
+      publisherssList.add(new publishers("Hachette Book Group", "intake@hachettebookgroup.com", "212-546-7861"));
+      publisherssList.add(new publishers("HarperCollins", "mail@harpercollins.com", "800-242-7737"));
+      publisherssList.add(new publishers("Macmillan Publishers", "press.inquiries@macmillan.com", "505-438-6497"));
+      publisherssList.add(new publishers("Penguin-Ransom House", "generalqueries@penguinrandomhouse.sg", "800-733-3000"));
+      publisherssList.add(new publishers("Simon & Schuster", "inquiries@simonandschuster.com", "212-698-7000"));
+      publisherssList.add(new publishers("TCK Publishing", "tck@tck-publishing.com", "164-543-4545"));
+
+      bookssList.add(new bookss("0345296370", "Pawn of Prophecy", authoringEntitiesList.get(12), publisherssList.get(0)));
+      bookssList.add(new bookss("0345440781", "The Redemption of Althalus", authoringEntitiesList.get(19), publisherssList.get(0)));
+      bookssList.add(new bookss("0684830426", "The Great Gatsby", authoringEntitiesList.get(18), publisherssList.get(2)));
+      bookssList.add(new bookss("9781668002179", "Fairy Tale", authoringEntitiesList.get(10), publisherssList.get(2)));
+      bookssList.add(new bookss("", "For Whom the Bell Tolls", authoringEntitiesList.get(13), publisherssList.get(2)));
+      bookssList.add(new bookss("0486447162", "0060935464", authoringEntitiesList.get(17), publisherssList.get(0)));
+      bookssList.add(new bookss("0060935464", "To Kill A Mockingbird", authoringEntitiesList.get(20), publisherssList.get(0)));
+      bookssList.add(new bookss("0345300807", "castle of wizardry", authoringEntitiesList.get(12), publisherssList.get(0)));
+      bookssList.add(new bookss("0345500938", "Random House Publishing Group", authoringEntitiesList.get(12), publisherssList.get(0)));
+      bookssList.add(new bookss("1613823592", "Ulysses", authoringEntitiesList.get(14), publisherssList.get(3)));
+
+      adHocTeamMembersList.add(new ad_hoc_teams_members(authoringEntitiesList.get(11), authoringEntitiesList.get(19)));
+      adHocTeamMembersList.add(new ad_hoc_teams_members(authoringEntitiesList.get(12), authoringEntitiesList.get(19)));
+
       // Create the list of owners in the database.
       books.createEntity (authoringEntitiesList);
-//      books.createEntity (publisherssList);
-//      books.createEntity (bookssList);
-//      books.createEntity (adHocTeamMembersList);
+      books.createEntity (publisherssList);
+      books.createEntity (bookssList);
+      books.createEntity (adHocTeamMembersList);
 
       // Commit the changes so that the new data persists and is visible to other users.
       tx.commit();

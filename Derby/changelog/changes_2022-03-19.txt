@@ -1,6 +1,6 @@
 changes_20220319 - Initial Commit
 
-books.java
+Books.java
 - Added 2 composite uniwue constraints
 
 publishers.java
@@ -16,7 +16,7 @@ books.java
 
 
 For the database:
-URL: jdbc:derby:database/Books;create=true
+URL: jdbc:derby:database/Booksdb;create=true
 - found in persistence.xml [line 22]
 username: app
 - found in persistence.xml [line 23]

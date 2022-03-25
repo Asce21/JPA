@@ -13,3 +13,14 @@ bookss.java
 
 ad_hoc_teams_members_id
 - I changed this attributes to be of type String. That worked, for some reason
+
+
+
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]

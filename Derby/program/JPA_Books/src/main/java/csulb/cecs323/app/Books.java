@@ -14,13 +14,13 @@ package csulb.cecs323.app;
 
 // Import all of the entity classes that we have written for this application.
 import csulb.cecs323.model.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
@@ -33,6 +33,11 @@ import java.util.logging.Logger;
  * </p>
  */
 public class Books {
+   // Variable Declarations
+   Scanner keyboard = new Scanner(System.in);
+   int userChoice = -1, userYearFormed;
+   String userName, userEmail, userType, userHeadWriter;
+
    /**
     * You will likely need the entityManager in a great many functions throughout your application.
     * Rather than make this a global variable, we will make it an instance variable within the Books
@@ -138,7 +143,7 @@ public class Books {
       adHocTeamMembersList.add(new ad_hoc_teams_members(authoringEntitiesList.get(11), authoringEntitiesList.get(19)));
       adHocTeamMembersList.add(new ad_hoc_teams_members(authoringEntitiesList.get(12), authoringEntitiesList.get(19)));
 
-      // Create the list of owners in the database.
+      // Create the tables in the database.
       books.createEntity (authoringEntitiesList);
       books.createEntity (publisherssList);
       books.createEntity (bookssList);
@@ -147,6 +152,8 @@ public class Books {
       // Commit the changes so that the new data persists and is visible to other users.
       tx.commit();
       LOGGER.fine("End of Transaction");
+
+      //Start of my new code
 
    } // End of the main method
 
@@ -170,6 +177,104 @@ public class Books {
 //         LOGGER.info("Persisted object after flush (non-null id): " + next);
 //      }
    } // End of createEntity member method
+
+   public void welcomeMessage()   {
+      System.out.println("Welcome to the Books JPA application.");
+   }// End pf welcomeMessage member method
+
+   public void mainMenu()  {
+      //Method Variables
+      userChoice =-1;
+
+      do {
+         //Display choices to the user
+         System.out.println("Please select the number of the option below: ");
+         System.out.println("1. Add a new object");
+         System.out.println("2. List all the information about a specific Object:");
+         System.out.println("3. Delete a Book – be sure to prompt for all the elements of a candidate key.");
+         System.out.println("4. Update a Book – Change the authoring entity for an existing book.");
+         System.out.println("5. List the primary key of all the rows of:");
+
+         //Get the input from the user
+         userChoice = keyboard.nextInt();
+
+         // Process the user choice
+         switch (userChoice)  {
+            case 1:
+               addObjectMenu();
+               break;
+            case 2:
+               break;
+            case 3:
+               break;
+            case 4:
+               break;
+            case 5:
+               break;
+         }// End of the switch statement to process the choice
+      } while (userChoice < 1 || userChoice > 5);
+   }// End pf mainMenu member method
+
+   public void addObjectMenu()   {
+      //Method Variables
+      userChoice =-1;
+
+      //Process user choice
+      do {
+         // Display the choices
+         System.out.println("Please select the number of the object to add below: ");
+         System.out.println("1. Add a new Writing Group");
+         System.out.println("2. Add a new Individual Author");
+         System.out.println("3. Add a new Ad Hoc Team");
+         System.out.println("4. Add an Individual Author to an existing Ad Hoc Team");
+
+         //Get the input from the user
+         userChoice = keyboard.nextInt();
+
+         // Process the user choice
+         switch (userChoice)  {
+            case 1:
+               addWritingGroup();
+               break;
+            case 2:
+               break;
+            case 3:
+               break;
+            case 4:
+               break;
+         }// End of the switch statement to process the choice
+      } while (userChoice < 1 || userChoice > 5);
+   }// End pf addObjectMenu member method
+
+   public void addWritingGroup() {
+      //Method Variables
+      userChoice =-1;
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("Books");
+      EntityManager manager = factory.createEntityManager();
+      // Create an instance of Books and store our new EntityManager as an instance variable.
+      Books books = new Books(manager);
+      EntityTransaction tx = manager.getTransaction();
+      tx.begin();
+      List<authoring_entities> aetmp = new ArrayList<>();
+
+      //Prompt the user for the columns of Writing Group and mention whether they can be null
+      System.out.print("Enter a name for the Writing Group (not null): ");
+      userName = keyboard.nextLine();
+      System.out.print("Enter an email for the Writing Group (not null): ");
+      userEmail = keyboard.nextLine();
+      userType = "Writing Group";
+      System.out.print("Enter a year for when the Writing Group formed (.length() == 0): ");
+      userYearFormed = keyboard.nextInt();
+      System.out.print("Enter a head writer for the Writing Group (not null): ");
+      userHeadWriter = keyboard.nextLine();
+      if (userHeadWriter == "")
+         userHeadWriter = null;
+
+      //Add the Weiring group to the database
+      aetmp.add(new authoring_entities(userEmail, userType, userName, userHeadWriter, userYearFormed));
+      books.createEntity(aetmp);
+      tx.commit();
+   }// End pf addWritingGroup member method
 
 
 } // End of Books class

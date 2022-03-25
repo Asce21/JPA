@@ -1,0 +1,18 @@
+changes_20220324
+
+Books.java
+- all of mu additions to main start at ~ line 156
+- Variable Declarations added at ~ line 37
+- Added method welcomeMessage 
+- Added method mainMenu 
+- Added method addObjectMenu 
+- Added method addWritingGroup
+
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]

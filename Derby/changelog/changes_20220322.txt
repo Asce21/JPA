@@ -1,5 +1,13 @@
 changes_20220322
 
-main.java
+Books.java
 - Inserted sample data for all tables
 - changed List type of adHocTeamMembersList to ad_hoc_team_members [line 80]
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]

@@ -15,8 +15,8 @@ public class publishers {
     private String name;
 
     //This variable serves as the link to books
-//    @OneToMany(mappedBy = "bookPublisher")
-//    List<books> ListOfBooks = new ArrayList<>();
+    @OneToMany(mappedBy = "bookPublisher")
+    List<bookss> ListOfBooks = new ArrayList<>();
 
     @Column(unique = true, nullable = false, length = 80)
     private String email;

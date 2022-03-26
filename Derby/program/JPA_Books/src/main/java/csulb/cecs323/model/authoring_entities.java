@@ -28,28 +28,28 @@ public class authoring_entities {
     private String head_writer;
 
     @Column
-    private int year_formed;
+    private Integer year_formed;
 
     //Constructors
     public authoring_entities(){}
-    public authoring_entities(String initEmail, String initName, String initHeadWriter, int initYearFormed)   {
+    //Individual Author
+    public authoring_entities(String initEmail, String initAuthoringEntityType, String initName)   {
+        this.email = initEmail;
+        this.authoring_entity_type = initAuthoringEntityType;
+        this.name = initName;
+        this.head_writer = null;
+        this.year_formed = null;
+    }//End of the overloaded constructor minus initial values for head_writer, year_formed
+    //Ad Hoc Team
+    public authoring_entities(String initEmail, String initName, String initAuthoringEntityType, Integer initYearFormed)   {
         this.email = initEmail;
         this.name = initName;
-        this.head_writer = initHeadWriter;
+        this.authoring_entity_type = initAuthoringEntityType;
+        this.head_writer = null;
         this.year_formed = initYearFormed;
-    }//End of the constructor minus initial value for authoring_entity_type
-    //    public authoring_entities(String initEmail, String initAuthoringEntityType, String initName, int initYearFormed)   {
-//        this.email = initEmail;
-//        this.authoring_entity_type = initAuthoringEntityType;
-//        this.name = initName;
-//        this.year_formed = initYearFormed;
-//    }//End of the constructor minus initial value for head_writer
-    public authoring_entities(String initEmail, String initName, int initYearFormed)   {
-        this.email = initEmail;
-        this.name = initName;
-        this.year_formed = initYearFormed;
-    }//End of the constructor minus initial value for authoring_entity_type, head_writer
-    public authoring_entities(String initEmail, String initAuthoringEntityType, String initName, String initHeadWriter, int initYearFormed)   {
+    }//End of the overloaded constructor minus initial value for head_writer
+    //Writing Group
+    public authoring_entities(String initEmail, String initAuthoringEntityType, String initName, String initHeadWriter, Integer initYearFormed)   {
         this.email = initEmail;
         this.authoring_entity_type = initAuthoringEntityType;
         this.name = initName;
@@ -66,8 +66,8 @@ public class authoring_entities {
     public void setName(String name) {this.name = name;}
     public String getHead_writer() {return head_writer;}
     public void setHead_writer(String head_writer) {this.head_writer = head_writer;}
-    public int getYear_formed() {return year_formed;}
-    public void setYear_formed(int year_formed) {this.year_formed = year_formed;}
+    public Integer getYear_formed() {return year_formed;}
+    public void setYear_formed(Integer year_formed) {this.year_formed = year_formed;}
 
     //Other Methods
     @Override

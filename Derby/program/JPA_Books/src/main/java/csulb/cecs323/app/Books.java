@@ -105,18 +105,18 @@ public class Books {
               "Socrates", -400));
       authoringEntitiesList.add(new authoring_entities("the.february.house@yahoo.com", "Writing Group", "The February House",
               "W.H. Auden", 1940));
-      authoringEntitiesList.add(new authoring_entities("stephen.king@gmail.com", "Stephen King", 1976));
-      authoringEntitiesList.add(new authoring_entities("de@gmail.com", "David Eddings", 1931));
-      authoringEntitiesList.add(new authoring_entities("leigh@gmail.com", "Leigh Eddings", 1937));
-      authoringEntitiesList.add(new authoring_entities("ernestH@gmail.com", "Ernest Hemingway", 1899));
-      authoringEntitiesList.add(new authoring_entities("jj@yahoo.com", "James Joyce", 1882));
-      authoringEntitiesList.add(new authoring_entities("Ezra-Pound@yahoo.com", "Ezra Pound", 1885));
-      authoringEntitiesList.add(new authoring_entities("Gertrude-Stein@mail.me", "Gertrude Stein", 1874));
-      authoringEntitiesList.add(new authoring_entities("Fitzgerald@gmail.com", "F. Scott Fitzgerald", 1896));
-      authoringEntitiesList.add(new authoring_entities("warhol@aol.com", "Andy Warhol", 1928));
+      authoringEntitiesList.add(new authoring_entities("stephen.king@gmail.com", "Individual Author", "Stephen King"));
+      authoringEntitiesList.add(new authoring_entities("de@gmail.com", "Individual Author", "David Eddings"));
+      authoringEntitiesList.add(new authoring_entities("leigh@gmail.com", "Individual Author", "Leigh Eddings"));
+      authoringEntitiesList.add(new authoring_entities("ernestH@gmail.com", "Individual Author", "Ernest Hemingway"));
+      authoringEntitiesList.add(new authoring_entities("jj@yahoo.com", "Individual Author", "James Joyce"));
+      authoringEntitiesList.add(new authoring_entities("Ezra-Pound@yahoo.com", "Individual Author", "Ezra Pound"));
+      authoringEntitiesList.add(new authoring_entities("Gertrude-Stein@mail.me", "Individual Author", "Gertrude Stein"));
+      authoringEntitiesList.add(new authoring_entities("Fitzgerald@gmail.com", "Individual Author", "F. Scott Fitzgerald"));
+      authoringEntitiesList.add(new authoring_entities("warhol@aol.com", "Individual Author", "Andy Warhol"));
       authoringEntitiesList.add(new authoring_entities("david.leigh@yahoo.com.com", "Ad Hoc Team", "David & Leigh Eddings",
-              "Virginia Wool", 1950));
-      authoringEntitiesList.add(new authoring_entities("harperlee@gmail.com", "Harper Lee", 1926));
+              "David Eddings", 1990));
+      authoringEntitiesList.add(new authoring_entities("harperlee@gmail.com", "Individual Author", "Harper Lee"));
 
       publisherssList.add(new publishers("Spectrum Literary Agency, Inc.", "general@spectrumliteraryagency.com", "212-362-4323"));
       publisherssList.add(new publishers("Random House Publishing Group", "main@randomhousebooks.com", "800-726-0600"));
@@ -248,7 +248,6 @@ public class Books {
 
    public void addWritingGroup() {
       //Method Variables
-      userChoice =-1;
       EntityManagerFactory factory = Persistence.createEntityManagerFactory("Books");
       EntityManager manager = factory.createEntityManager();
       // Create an instance of Books and store our new EntityManager as an instance variable.
@@ -257,24 +256,80 @@ public class Books {
       tx.begin();
       List<authoring_entities> aetmp = new ArrayList<>();
 
-      //Prompt the user for the columns of Writing Group and mention whether they can be null
-      System.out.print("Enter a name for the Writing Group (not null): ");
+      //Prompt the user for the columns of Writing Group
+      System.out.print("Enter a name for the Writing Group: ");
       userName = keyboard.nextLine();
-      System.out.print("Enter an email for the Writing Group (not null): ");
+      System.out.print("Enter an email for the Writing Group: ");
       userEmail = keyboard.nextLine();
       userType = "Writing Group";
-      System.out.print("Enter a year for when the Writing Group formed (.length() == 0): ");
+      System.out.print("Enter a year for when the Writing Group formed: ");
       userYearFormed = keyboard.nextInt();
-      System.out.print("Enter a head writer for the Writing Group (not null): ");
+      System.out.print("Enter a head writer for the Writing Group: ");
       userHeadWriter = keyboard.nextLine();
-      if (userHeadWriter == "")
-         userHeadWriter = null;
 
       //Add the Weiring group to the database
       aetmp.add(new authoring_entities(userEmail, userType, userName, userHeadWriter, userYearFormed));
       books.createEntity(aetmp);
       tx.commit();
    }// End pf addWritingGroup member method
+
+   public void addIndividualWriter()   {
+      //Method Variables
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("Books");
+      EntityManager manager = factory.createEntityManager();
+      // Create an instance of Books and store our new EntityManager as an instance variable.
+      Books books = new Books(manager);
+      EntityTransaction tx = manager.getTransaction();
+      tx.begin();
+      List<authoring_entities> aetmp = new ArrayList<>();
+
+      //Prompt the user for the columns of Individual Author
+      System.out.println("Enter a name for the Author: ");
+      System.out.println("Enter an email for the Author: ");
+      userType = "Individual Author";
+
+      //Process user input into a row of an Individual Author
+      aetmp.add(new authoring_entities(userEmail, userType, userName));
+      books.createEntity(aetmp);
+      tx.commit();
+   }// End pf addIndividualWriter member method
+
+   public  void addAdHocTeam()   {
+      //Method Variables
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("Books");
+      EntityManager manager = factory.createEntityManager();
+      // Create an instance of Books and store our new EntityManager as an instance variable.
+      Books books = new Books(manager);
+      EntityTransaction tx = manager.getTransaction();
+      tx.begin();
+      List<authoring_entities> aetmp = new ArrayList<>();
+
+      //Prompt the user for the columns of Writing Group
+      System.out.print("Enter a name for the Ad Hoc Team: ");
+      userName = keyboard.nextLine();
+      System.out.print("Enter an email for the Ad Hoc Team: ");
+      userEmail = keyboard.nextLine();
+      userType = "Ad Hoc Team";
+      System.out.print("Enter a year for when the Ad Hoc Team formed: ");
+      userYearFormed = keyboard.nextInt();
+
+      //Add the Weiring group to the database
+      aetmp.add(new authoring_entities(userEmail, userType, userName, userYearFormed));
+      books.createEntity(aetmp);
+      tx.commit();
+   }// End pf addIndividualWriter member method
+
+   public  void addToTeam()   {
+      //Method Variables
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("Books");
+      EntityManager manager = factory.createEntityManager();
+      // Create an instance of Books and store our new EntityManager as an instance variable.
+      Books books = new Books(manager);
+      EntityTransaction tx = manager.getTransaction();
+      tx.begin();
+      List<authoring_entities> aetmp = new ArrayList<>();
+
+   }// End pf addToTeam member method
 
 
 } // End of Books class

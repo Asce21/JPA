@@ -2,15 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\Derby",
-    "\\Derby\\changelog",
-    "\\Derby\\program\\JPA_Books",
-    "\\Derby\\program\\JPA_Books\\src",
-    "\\Derby\\program\\JPA_Books\\src\\main",
-    "\\Derby\\program\\JPA_Books\\src\\main\\java",
-    "\\Derby\\program\\JPA_Books\\src\\main\\java\\csulb",
-    "\\Derby\\program\\JPA_Books\\src\\main\\java\\csulb\\cecs323",
-    "\\Derby\\program\\JPA_Books\\src\\main\\java\\csulb\\cecs323\\model"
+    "\\Derby\\changelog"
   ],
-  "SelectedNode": "\\Derby\\changelog\\changes_20220322.txt",
+  "SelectedNode": "\\Derby\\changelog\\changes_20220324.txt",
   "PreviewInSolutionExplorer": false
 }

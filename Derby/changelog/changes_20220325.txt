@@ -1,0 +1,20 @@
+changes_20220325
+
+authoring_entities.java
+- The type for year_formed was changed from int to Integer to allow for null values
+
+authoring_entities.java
+- Added another overloaded constructor that is minus head_writer, year_formed
+
+Books.java
+- Updated all sample Individual Author to reflect the new constructor in authoring_entities
+- Added the method addIndividualWriter
+- Added a method named addAdHocTeam to add an Ad Hoc Team to the database
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]

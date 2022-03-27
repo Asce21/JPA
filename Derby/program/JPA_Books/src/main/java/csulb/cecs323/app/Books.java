@@ -14,10 +14,8 @@ package csulb.cecs323.app;
 
 // Import all of the entity classes that we have written for this application.
 import csulb.cecs323.model.*;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +34,7 @@ public class Books {
    // Variable Declarations
    Scanner keyboard = new Scanner(System.in);
    int userChoice = -1, userYearFormed;
-   String userName, userEmail, userType, userHeadWriter;
+   String userName, userEmail, userType, userHeadWriter, userAuthor, userTeam, userPhon;
 
    /**
     * You will likely need the entityManager in a great many functions throughout your application.
@@ -191,9 +189,14 @@ public class Books {
          System.out.println("Please select the number of the option below: ");
          System.out.println("1. Add a new object");
          System.out.println("2. List all the information about a specific Object:");
-         System.out.println("3. Delete a Book – be sure to prompt for all the elements of a candidate key.");
+         System.out.println("3. Delete a Book");
+                               // be sure to prompt for all the elements of a candidate key.
+                              // Make sure that the book actually exists.
          System.out.println("4. Update a Book – Change the authoring entity for an existing book.");
          System.out.println("5. List the primary key of all the rows of:");
+                              // 1. Publishers
+                              // 2. Books (show the title as well as the ISBN)
+                              // 3. Authoring entities – and supply the type of authoring entity for each one as well.
 
          //Get the input from the user
          userChoice = keyboard.nextInt();
@@ -219,7 +222,34 @@ public class Books {
       //Method Variables
       userChoice =-1;
 
-      //Process user choice
+      do {
+         // Display the choices
+         System.out.println("Please select the number of the object to add below: ");
+         System.out.println("1. Add a new Authoring Entity");
+         System.out.println("2. Add a new Publisher");
+         System.out.println("3. Add a new Book");
+
+         //Get the input from the user
+         userChoice = keyboard.nextInt();
+
+         // Process the user choice
+         switch (userChoice)  {
+            case 1:
+               addAuthoringEntitiesMenu();
+               break;
+            case 2:
+               addPublisher();
+               break;
+            case 3:
+               break;
+         }// End of the switch statement to process the choice
+      } while (userChoice < 1 || userChoice > 3);
+   }// End pf addObjectMenu member method
+
+   public void addAuthoringEntitiesMenu()   {
+      //Method Variables
+      userChoice =-1;
+
       do {
          // Display the choices
          System.out.println("Please select the number of the object to add below: ");
@@ -237,10 +267,13 @@ public class Books {
                addWritingGroup();
                break;
             case 2:
+               addIndividualWriter();
                break;
             case 3:
+               addAdHocTeam();
                break;
             case 4:
+               addToTeam();
                break;
          }// End of the switch statement to process the choice
       } while (userChoice < 1 || userChoice > 5);
@@ -285,7 +318,9 @@ public class Books {
 
       //Prompt the user for the columns of Individual Author
       System.out.println("Enter a name for the Author: ");
+      userName = keyboard.nextLine();
       System.out.println("Enter an email for the Author: ");
+      userEmail = keyboard.nextLine();
       userType = "Individual Author";
 
       //Process user input into a row of an Individual Author
@@ -304,7 +339,7 @@ public class Books {
       tx.begin();
       List<authoring_entities> aetmp = new ArrayList<>();
 
-      //Prompt the user for the columns of Writing Group
+      // Prompt the user for the columns of Writing Group
       System.out.print("Enter a name for the Ad Hoc Team: ");
       userName = keyboard.nextLine();
       System.out.print("Enter an email for the Ad Hoc Team: ");
@@ -313,7 +348,7 @@ public class Books {
       System.out.print("Enter a year for when the Ad Hoc Team formed: ");
       userYearFormed = keyboard.nextInt();
 
-      //Add the Weiring group to the database
+      // Add the Weiring group to the database
       aetmp.add(new authoring_entities(userEmail, userType, userName, userYearFormed));
       books.createEntity(aetmp);
       tx.commit();
@@ -327,9 +362,87 @@ public class Books {
       Books books = new Books(manager);
       EntityTransaction tx = manager.getTransaction();
       tx.begin();
+      List<ad_hoc_teams_members> adtmp = new ArrayList<>();
       List<authoring_entities> aetmp = new ArrayList<>();
+      List<String> ls = new ArrayList<>();
+      authoring_entities aeOne, aeTwo;
 
+      // Display all possible authors
+      Query q = manager.createNativeQuery("SELECT EMAIL " +
+                                             "FROM AUTHORING_ENTITIES " +
+                                             "WHERE AUTHORING_ENTITY_TYPE = \'Individual Author\' ");
+      ls = q.getResultList();
+
+      // Let the user select the author to join the team
+      for (int index = 0; index < ls.size(); index++) {
+         System.out.print(index + ". ");
+         System.out.println(ls.get(index));
+      }// End of the for loop
+
+      System.out.print("Please select the index of an author to join the team: ");
+      userChoice = keyboard.nextInt();
+      userAuthor = ls.get(userChoice);
+
+      // Display all teams
+      q = manager.createNativeQuery("SELECT EMAIL " +
+                                       "FROM AUTHORING_ENTITIES " +
+                                       "WHERE AUTHORING_ENTITY_TYPE = \'Ad Hoc Team\' ");
+      ls = q.getResultList();
+
+      // Let the user select a team to join
+      for (int index = 0; index < ls.size(); index++) {
+         System.out.print(index + ". ");
+         System.out.println(ls.get(index));
+      }// End of the for loop
+
+      System.out.print("Please select the index of a team: ");
+      userChoice = keyboard.nextInt();
+      userTeam = ls.get(userChoice);
+
+      // Get the author
+      q = manager.createNativeQuery("SELECT * " +
+                                       "FROM AUTHORING_ENTITIES " +
+                                       "WHERE EMAIL = " + userAuthor + ";");
+      aetmp = q.getResultList();
+      aeOne = aetmp.get(0);
+      ls.clear();
+
+      // Get the Team
+      q = manager.createNativeQuery("SELECT * " +
+                                       "FROM AUTHORING_ENTITIES " +
+                                       "WHERE EMAIL = " + userTeam + ";");
+      aetmp = q.getResultList();
+      aeTwo = aetmp.get(0);
+      ls.clear();
+
+      // Add the author
+      adtmp.add(new ad_hoc_teams_members(aeOne, aeTwo));
    }// End pf addToTeam member method
+
+   public void addPublisher() {
+      //Method Variables
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("Books");
+      EntityManager manager = factory.createEntityManager();
+      // Create an instance of Books and store our new EntityManager as an instance variable.
+      Books books = new Books(manager);
+      EntityTransaction tx = manager.getTransaction();
+      tx.begin();
+      List<publishers> pubTMP = new ArrayList<>();
+
+      // Prompt the user for the columns of publisher
+      System.out.println("Enter a name for the Publisher: ");
+      userName = keyboard.nextLine();
+      System.out.println("Enter an email for the Publisher: ");
+      userEmail = keyboard.nextLine();
+      System.out.println("Enter an phone number for the Publisher (XXX-XXX-XXXX): ");
+      userPhon = keyboard.nextLine();
+
+
+      // Add the publisher
+      pubTMP.add(new publishers(userName, userEmail, userPhon));
+      books.createEntity(pubTMP);
+      tx.commit();
+   }// End pf addPublisher member method
 
 
 } // End of Books class

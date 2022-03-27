@@ -1,0 +1,16 @@
+changes_20220326
+
+Books.java
+- Added the java code to add an author to an ad hoc team
+- Updated the switch statement in addAuthoringEntitiesMenu [~line 248] to call added methods
+- created the addPublisher method
+- Updated the switch statement in addObjectMenu to account for case 2 (adding publisher)
+
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]

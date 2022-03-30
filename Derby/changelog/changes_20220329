@@ -1,0 +1,15 @@
+changes_20220329
+
+Books.java
+- Added a method named deleteBook to delete a book from the database
+- Added a method named updateBook to update a book in the database
+- Added a method named listPrimaryKeys to list the primary keys of all elements of a table
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]
+

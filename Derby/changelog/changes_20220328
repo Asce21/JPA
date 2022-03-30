@@ -1,0 +1,14 @@
+changes_20220328
+
+Books.java
+- Added a method named addBook to add a book to the database
+- Added a method named listInfoMenu to display the information available to be listed
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: app
+- found in persistence.xml [line 24]
+

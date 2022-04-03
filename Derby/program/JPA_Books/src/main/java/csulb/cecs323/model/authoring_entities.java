@@ -28,7 +28,12 @@ public class authoring_entities {
     private Integer year_formed;
 
     //Constructors
-    public authoring_entities(){}
+    public authoring_entities(){}// End of the default consructor
+    //Bare Minimum
+    public authoring_entities(String initEmail, String initName) {
+        this.email = initEmail;
+        this.name = initName;
+    }// End of the constructor that initializes only what is a must
     //Individual Author
     public authoring_entities(String initEmail, String initAuthoringEntityType, String initName)   {
         this.email = initEmail;

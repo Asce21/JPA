@@ -1,0 +1,66 @@
+changes_20220402
+
+Books.java - This update is meant to address the testing / aesthetics of the program
+- Added two System.out.println(); statements at the beginning of the run for most methods
+- Added code in most methods to clar the buffer
+- Note that red writing in the console DOES NOT always mean there is something wrong
+
+authoring_entities.java
+- Added a constructor to initialize the essentials only
+
+Methods Tested
+- addWritingGroup
+- addIndividualWriter
+- addAdHocTeam
+- addToTeam: Not sure why it's pausing, but it adds a member
+- addPublisher
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: appSystem.out.println();
+System.out.println("Add Authoring Entity");
+- found in persistence.xml [line 24]
+
+
+// Clear the buffer
+clearBuffer = keyboard.nextLine();
+
+-- Test Data for the methods
+      // addWritingGroup
+      - Test Group
+      - tg@gmail.com
+      - 2020
+      - David Eddings
+
+      // addIndividualWriter
+      - Test Author
+      - ta@gmail.com
+
+      // addAdHocTeam
+      - TFL
+      - tfl@gmail.com
+      - 2022
+
+      // addToTeam
+      0-0
+
+      // addPublisher
+      - Test Publishing House
+      - main@tph.com
+      - 123-456-7890
+
+      // addBook
+
+      // listInfoMenu
+
+      // deleteBook
+
+      // updateBook
+
+      // listPrimaryKeys
+
+
+

@@ -13,6 +13,9 @@ public class bookss {
     @Column(nullable = false, length = 17)
     private String isbn;
 
+    @Column(nullable = false)
+    private Integer year_published;
+
     @Column(nullable = false, length = 80)
     private String title;
 
@@ -28,8 +31,9 @@ public class bookss {
 
     //Constructors
     public bookss()  {}
-    public bookss(String initIsbn, String initTitle, authoring_entities initAuthoring_entity_name, publishers initBookPublisher) {
+    public bookss(String initIsbn, Integer initYearPublished, String initTitle, authoring_entities initAuthoring_entity_name, publishers initBookPublisher) {
         this.isbn = initIsbn;
+        this.year_published = initYearPublished;
         this.title = initTitle;
         this.authoringEntity = initAuthoring_entity_name;
         this.bookPublisher = initBookPublisher;
@@ -38,6 +42,8 @@ public class bookss {
     //Getters & Setters
     public String getIsbn() {return isbn;}
     public void setIsbn(String isbn) {this.isbn = isbn;}
+    public Integer getYearPublished() {return year_published;}
+    public void setYearPublished(Integer newYearPublished) {this.year_published = newYearPublished;}
     public String getTitle() {return title;}
     public void setTitle(String title) {this.title = title;}
     public authoring_entities getAuthoringEntity() {return authoringEntity;}
@@ -49,6 +55,7 @@ public class bookss {
     @Override
     public String toString () {
         return "ISBN: " + this.getIsbn() + "\n" +
+                "Year Published: " + this.getYearPublished() + "\n" +
                 "Book Title: " + this.getTitle() + "\n" +
                 "Authoring Entity Email: " + this.getAuthoringEntity().getEmail() + "\n" +
                 "Publisher: " + this.getBookPublisher().getName();

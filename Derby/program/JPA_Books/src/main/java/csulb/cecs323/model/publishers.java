@@ -43,9 +43,9 @@ public class publishers {
     //Other Methods
     @Override
     public String toString () {
-        return "Publidher's name: " + this.getName() + "\n" +
-                "Publidher's email: " + this.getEmail() + "\n" +
-                "Publidher's phone number: " + this.phone;
+        return "Publisher's name: " + this.getName() + "\n" +
+                "Publisher's email: " + this.getEmail() + "\n" +
+                "Publisher's phone number: " + this.phone;
     }//End of the toString method
 
 }//End of class publishers

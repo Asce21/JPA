@@ -1,9 +1,10 @@
-changes_20220402
+changes_20220402_20220403
 
 Books.java - This update is meant to address the testing / aesthetics of the program
 - Added two System.out.println(); statements at the beginning of the run for most methods
 - Added code in most methods to clar the buffer
 - Note that red writing in the console DOES NOT always mean there is something wrong
+- In the variable delarations, I changed the int data type to Integer
 
 authoring_entities.java
 - Added a constructor to initialize the essentials only
@@ -14,6 +15,8 @@ Methods Tested
 - addAdHocTeam
 - addToTeam: Not sure why it's pausing, but it adds a member
 - addPublisher
+- addBook: This gives an error, but works
+- listInfoMenu(publisher's, books, Writing Groups)
 
 For the database:
 URL: jdbc:derby:database/Booksdb;create=true
@@ -23,7 +26,6 @@ username: app
 password: appSystem.out.println();
 System.out.println("Add Authoring Entity");
 - found in persistence.xml [line 24]
-
 
 // Clear the buffer
 clearBuffer = keyboard.nextLine();
@@ -45,7 +47,7 @@ clearBuffer = keyboard.nextLine();
       - 2022
 
       // addToTeam
-      0-0
+      - N/A
 
       // addPublisher
       - Test Publishing House
@@ -53,8 +55,12 @@ clearBuffer = keyboard.nextLine();
       - 123-456-7890
 
       // addBook
+      - 0586447162
+      - 2022
+      - TestBook
 
       // listInfoMenu
+      - N/A
 
       // deleteBook
 

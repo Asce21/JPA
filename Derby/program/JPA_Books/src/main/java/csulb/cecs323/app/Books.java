@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 public class Books {
    // Variable Declarations
    Scanner keyboard = new Scanner(System.in);
-   int userChoice = -1, userYearFormed, count;
+   Integer userChoice = -1, userYearFormed, count, userYearPublished;
    String userName, userEmail, userType, userHeadWriter, userAuthor, userTeam, userPhone, userISBN, userTitle, clearBuffer;
    Query query;
 
@@ -94,9 +94,9 @@ public class Books {
               " José Gorostiza", 1920));
       authoringEntitiesList.add(new authoring_entities("the.inlings@yahoo.com", "Writing Group", "The Inklings",
               "J. R. R. Tolkien", 1934));
-      authoringEntitiesList.add(new authoring_entities("tDymockp@gmail.com", "Writing Group", "The Dymock Poets\n",
+      authoringEntitiesList.add(new authoring_entities("tDymockp@gmail.com", "Writing Group", "The Dymock Poets",
               "Lascelles Abercrombie", 1915));
-      authoringEntitiesList.add(new authoring_entities("tar@aol.com", "Writing Group", "The Algonquin Roundtable\n",
+      authoringEntitiesList.add(new authoring_entities("tar@aol.com", "Writing Group", "The Algonquin Roundtable",
               "John Peter Toohey", 1919));
       authoringEntitiesList.add(new authoring_entities("soO@mail.me", "Writing Group", "Stratford-on-Odeon",
               "Sylvia Beach", 1919));
@@ -130,16 +130,16 @@ public class Books {
       publisherssList.add(new publishers("Simon & Schuster", "inquiries@simonandschuster.com", "212-698-7000"));
       publisherssList.add(new publishers("TCK Publishing", "tck@tck-publishing.com", "164-543-4545"));
 
-      bookssList.add(new bookss("0345296370", "Pawn of Prophecy", authoringEntitiesList.get(12), publisherssList.get(0)));
-      bookssList.add(new bookss("0345440781", "The Redemption of Althalus", authoringEntitiesList.get(19), publisherssList.get(0)));
-      bookssList.add(new bookss("0684830426", "The Great Gatsby", authoringEntitiesList.get(18), publisherssList.get(2)));
-      bookssList.add(new bookss("9781668002179", "Fairy Tale", authoringEntitiesList.get(10), publisherssList.get(2)));
-      bookssList.add(new bookss("", "For Whom the Bell Tolls", authoringEntitiesList.get(13), publisherssList.get(2)));
-      bookssList.add(new bookss("0486447162", "0060935464", authoringEntitiesList.get(17), publisherssList.get(0)));
-      bookssList.add(new bookss("0060935464", "To Kill A Mockingbird", authoringEntitiesList.get(20), publisherssList.get(0)));
-      bookssList.add(new bookss("0345300807", "castle of wizardry", authoringEntitiesList.get(12), publisherssList.get(0)));
-      bookssList.add(new bookss("0345500938", "Random House Publishing Group", authoringEntitiesList.get(12), publisherssList.get(0)));
-      bookssList.add(new bookss("1613823592", "Ulysses", authoringEntitiesList.get(14), publisherssList.get(3)));
+      bookssList.add(new bookss("0345296370", 1983, "Pawn of Prophecy", authoringEntitiesList.get(12), publisherssList.get(0)));
+      bookssList.add(new bookss("0345440781", 2001, "The Redemption of Althalus", authoringEntitiesList.get(19), publisherssList.get(0)));
+      bookssList.add(new bookss("0684830426", 1991, "The Great Gatsby", authoringEntitiesList.get(18), publisherssList.get(2)));
+      bookssList.add(new bookss("9781668002", 2022, "Fairy Tale", authoringEntitiesList.get(10), publisherssList.get(2)));
+      bookssList.add(new bookss("0684803356", 1995, "For Whom the Bell Tolls", authoringEntitiesList.get(13), publisherssList.get(2)));
+      bookssList.add(new bookss("0062561022", 2016, "Go Set a Watchman\n", authoringEntitiesList.get(20), publisherssList.get(0)));
+      bookssList.add(new bookss("0060935464", 2002, "To Kill A Mockingbird", authoringEntitiesList.get(20), publisherssList.get(0)));
+      bookssList.add(new bookss("0345300807", 1985, "castle of wizardry", authoringEntitiesList.get(12), publisherssList.get(0)));
+      bookssList.add(new bookss("0345500938", 2007, "The Elenium: The Diamond Throne the Ruby Knight the Sapphire Rose", authoringEntitiesList.get(12), publisherssList.get(0)));
+      bookssList.add(new bookss("1613823592", 1990, "Ulysses", authoringEntitiesList.get(14), publisherssList.get(3)));
 
       adHocTeamMembersList.add(new ad_hoc_teams_members(authoringEntitiesList.get(11), authoringEntitiesList.get(19)));
       adHocTeamMembersList.add(new ad_hoc_teams_members(authoringEntitiesList.get(12), authoringEntitiesList.get(19)));
@@ -519,6 +519,7 @@ public class Books {
       List<authoring_entities> authoringList;// = new ArrayList<>();
       List<publishers> publishersList;// = new ArrayList<>();
       List<String> namesList;
+      List<Integer> intList;
       EntityTransaction tx = manager.getTransaction();
       tx.begin();
 
@@ -530,23 +531,29 @@ public class Books {
         System.out.println("Add Book");
         System.out.print("Please enter the ISBN of the book: ");
         userISBN = keyboard.nextLine();
+        System.out.print("Please enter the 4 digit year that the book was publishe: ");
+        userYearPublished = keyboard.nextInt();
+        // Clear the buffer
+        clearBuffer = keyboard.nextLine();
         System.out.print("Please enter the title of the book: ");
         userTitle = keyboard.nextLine();
 
         // Check that the ISBN is unique
         query = manager.createNativeQuery("SELECT COUNT(*) " +
                                              "FROM BOOKSS " +
-                                             "WHERE ISBN = " + userISBN + "; ");
+                                             "WHERE ISBN = " + userISBN + " ");
         count = query.getFirstResult();
 
         if (count > 0)
-           System.out.println("ISBN must be unique\n");
+           System.out.println("ISBN must be unique. Please enter a unique ISBN.\n");
+        else
+           System.out.println("The ISBN is unique! Please continue.\n");
      } while (count > 0);
 
       // Show the available authors to the user
       query = manager.createNativeQuery("SELECT NAME " +
                                            "FROM AUTHORING_ENTITIES " +
-                                           "ORDER BY EMAIL; ");
+                                           "ORDER BY EMAIL ");
 
       namesList = query.getResultList();
 
@@ -557,20 +564,43 @@ public class Books {
       // Prompt the user for the author of the book
       System.out.print("Please select the number of the author for this book: ");
       userChoice = keyboard.nextInt();
-      userName = namesList.get(userChoice);
+      userName = namesList.get(userChoice);  // Get the name of the authoring entity
 
+      // Get the email of the authoring entity
       query = manager.createNativeQuery("SELECT EMAIL " +
                                            "FROM AUTHORING_ENTITIES " +
-                                           "ORDER BY EMAIL; ");
+                                           "ORDER BY EMAIL ");
 
       namesList = query.getResultList();
       userEmail = namesList.get(userChoice);
-      authoringEntity = new authoring_entities(userEmail, userName);
+
+      // Get the type of the authoring entity
+      query = manager.createNativeQuery("SELECT AUTHORING_ENTITY_TYPE " +
+                                           "FROM AUTHORING_ENTITIES " +
+                                           "ORDER BY EMAIL ");
+      namesList = query.getResultList();
+      userType = namesList.get(userChoice);
+
+      // Get the head writer of the authoring entity
+      query = manager.createNativeQuery("SELECT HEAD_WRITER " +
+                                           "FROM AUTHORING_ENTITIES " +
+                                           "ORDER BY EMAIL ");
+      namesList = query.getResultList();
+      userHeadWriter = namesList.get(userChoice);
+
+      // Get the year formed of the authoring entity
+      query = manager.createNativeQuery("SELECT YEAR_FORMED " +
+                                           "FROM AUTHORING_ENTITIES " +
+                                           "ORDER BY EMAIL ");
+      intList = query.getResultList();
+      userYearFormed = intList.get(userChoice);
+
+      authoringEntity = new authoring_entities(userEmail, userType, userName, userHeadWriter, userYearFormed);
 
       // Show the available publisher to the user
       query = manager.createNativeQuery("SELECT NAME " +
                                            "FROM PUBLISHERS " +
-                                           "ORDER BY NAME; ");
+                                           "ORDER BY NAME ");
 
       namesList = query.getResultList();
 
@@ -585,20 +615,20 @@ public class Books {
 
       query = manager.createNativeQuery("SELECT EMAIL " +
                                            "FROM PUBLISHERS " +
-                                           "ORDER BY NAME; ");
+                                           "ORDER BY NAME ");
       namesList = query.getResultList();
       userEmail = namesList.get(userChoice);
 
       query = manager.createNativeQuery("SELECT PHONE " +
                                            "FROM PUBLISHERS " +
-                                           "ORDER BY NAME; ");
+                                           "ORDER BY NAME ");
       namesList = query.getResultList();
       userPhone = namesList.get(userChoice);
 
       publisher = new publishers(userName, userEmail, userPhone);
 
       // Add the book to the database
-      bookssList.add(new bookss(userISBN, userTitle, authoringEntity, publisher));
+      bookssList.add(new bookss(userISBN, userYearPublished, userTitle, authoringEntity, publisher));
       books.createEntity(bookssList);
       tx.commit();
    }// End of addBook member method
@@ -613,7 +643,10 @@ public class Books {
       tx.begin();
       List<publishers> publishersList = new ArrayList<>();
       List<bookss> bookssList;// = new ArrayList<>();
-      List<authoring_entities> wgList;// = new ArrayList<>();
+      List<authoring_entities> wgList = new ArrayList<>();
+      List<String> namesList = new ArrayList<>();
+      List<String> emailsList, phonesList, isbnList, titleList, authorsList, hwList;
+      List<Integer> yearList, yearFormedList;
 
       do {
          // Display the choices
@@ -628,26 +661,87 @@ public class Books {
          //Process the choice
          switch (userChoice)  {
             case 1:  // Publishers
-               query = manager.createNativeQuery("SELECT * " +
-                                                   "FROM PUBLISHERS;");
-               publishersList = query.getResultList();
+               query = manager.createNativeQuery("SELECT NAME " +
+                                                   "FROM PUBLISHERS " +
+                                                   "ORDER BY NAME ");
+               namesList = query.getResultList();
+
+               query = manager.createNativeQuery("SELECT EMAIL " +
+                                                    "FROM PUBLISHERS " +
+                                                    "ORDER BY NAME ");
+               emailsList = query.getResultList();
+
+               query = manager.createNativeQuery("SELECT PHONE " +
+                                                    "FROM PUBLISHERS " +
+                                                    "ORDER BY NAME ");
+               phonesList = query.getResultList();
+
+               for (int index = 0; index < namesList.size(); index++)
+                  publishersList.add(new publishers(namesList.get(index), emailsList.get(index), phonesList.get(index)));
+
                for (int index = 0; index < publishersList.size(); index++)
                   System.out.println("Record " + index + ": \n" + publishersList.get(index));
                break;
             case 2:  // Books
-               query = manager.createNativeQuery("SELECT * " +
-                                                   "FROM BOOKSS;");
-               bookssList = query.getResultList();
-               for (int index = 0; index < bookssList.size(); index++)
-                  System.out.println("Record " + index + ": \n" + bookssList.get(index));
+               query = manager.createNativeQuery("SELECT ISBN " +
+                                                   "FROM BOOKSS " +
+                                                   "ORDER BY ISBN ");
+               isbnList = query.getResultList();
+               query = manager.createNativeQuery("SELECT YEAR_PUBLISHED " +
+                                                   "FROM BOOKSS " +
+                                                   "ORDER BY ISBN ");
+               yearList = query.getResultList();
+               query = manager.createNativeQuery("SELECT TITLE " +
+                                                   "FROM BOOKSS " +
+                                                   "ORDER BY ISBN ");
+               titleList = query.getResultList();
+               query = manager.createNativeQuery("SELECT PUBLISHERS_NAME " +
+                                                   "FROM BOOKSS " +
+                                                   "ORDER BY ISBN ");
+               publishersList = query.getResultList();
+               query = manager.createNativeQuery("SELECT ae.NAME " +
+                                                   "FROM BOOKSS b INNER JOIN " +
+                                                   "AUTHORING_ENTITIES ae on b.AUTHOR_ENTITY_NAME = ae.EMAIL " +
+                                                   "ORDER BY b.ISBN ");
+               authorsList = query.getResultList();
+
+               for (int index = 0; index < isbnList.size(); index++)   {
+                  System.out.println("Record " + index + ": ");
+                  System.out.println("ISBN: " + isbnList.get(index));
+                  System.out.println("Year Published: " + yearList.get(index));
+                  System.out.println("Type: " + titleList.get(index));
+                  System.out.println("Publisher: " + publishersList.get(index));
+                  System.out.println("Author: " + authorsList.get(index));
+                  System.out.println("");
+               }// End of for loop to display each row
                break;
             case 3:  // Writing Groups
-               query = manager.createNativeQuery("SELECT * " +
+               query = manager.createNativeQuery("SELECT NAME " +
                                                     "FROM AUTHORING_ENTITIES " +
-                                                    "WHERE AUTHORING_ENTITY_TYPE IS 'Writing Group';");
-               wgList = query.getResultList();
-               for (int index = 0; index < publishersList.size(); index++)
-                  System.out.println("Record " + index + ": \n" + wgList.get(index));
+                                                    "WHERE AUTHORING_ENTITY_TYPE = 'Writing Group' " +
+                                                    "ORDER BY EMAIL ");
+               namesList = query.getResultList();
+               query = manager.createNativeQuery("SELECT EMAIL " +
+                                                   "FROM AUTHORING_ENTITIES " +
+                                                   "WHERE AUTHORING_ENTITY_TYPE = 'Writing Group' " +
+                                                   "ORDER BY EMAIL ");
+               emailsList = query.getResultList();
+               query = manager.createNativeQuery("SELECT HEAD_WRITER " +
+                                                     "FROM AUTHORING_ENTITIES " +
+                                                     "WHERE AUTHORING_ENTITY_TYPE = 'Writing Group' " +
+                                                     "ORDER BY EMAIL ");
+               hwList = query.getResultList();
+               query = manager.createNativeQuery("SELECT YEAR_FORMED " +
+                                                     "FROM AUTHORING_ENTITIES " +
+                                                     "WHERE AUTHORING_ENTITY_TYPE = 'Writing Group' " +
+                                                     "ORDER BY EMAIL ");
+               yearFormedList = query.getResultList();
+               for (int index = 0; index < emailsList.size(); index++)
+                  wgList.add(new authoring_entities(emailsList.get(index), "Writing Group", namesList.get(index),
+                          hwList.get(index), yearFormedList.get(index)));
+
+               for (int index = 0; index < wgList.size(); index++)
+                  System.out.println("Record " + index + ": \n" + wgList.get(index) + "\n");
                break;
          }// End of the switch statement to process the choice
 
@@ -665,18 +759,26 @@ public class Books {
       EntityTransaction tx = manager.getTransaction();
       tx.begin();
       List<bookss> bookssList;// = new ArrayList<>();
+      List<String> isbnList, titleList;
 
       // Show the user all the available books
       System.out.println();
       System.out.println("Delete Book");
       System.out.println("Below is a list of all available books:\n");
 
-      query = manager.createNativeQuery("SELECT * " +
-                                          "FROM BOOKSS;");
-      bookssList = query.getResultList();
+      query = manager.createNativeQuery("SELECT ISBN " +
+                                            "FROM BOOKSS " +
+                                            "ORDER BY ISBN ");
+      isbnList = query.getResultList();
+      query = manager.createNativeQuery("SELECT TITLE " +
+                                            "FROM BOOKSS " +
+                                            "ORDER BY ISBN ");
+      titleList = query.getResultList();
 
       for (int index = 0; index < bookssList.size(); index++)  {
-         System.out.println("Book " + index + ":\n" + bookssList.get(index));
+         System.out.println("Book " + index + ": " +
+                 "ISBN: " + isbnList.get(index) + "\n" +
+                 "Title: " + titleList.get(index));
       }// End of the for loop that displays a list of books
 
       // Prompt the user for the ISBN of the book to delete
@@ -699,12 +801,19 @@ public class Books {
       tx.commit();
 
       // Show the user the new books table
-      query = manager.createNativeQuery("SELECT * " +
-                                          "FROM BOOKSS;");
-      bookssList = query.getResultList();
+      query = manager.createNativeQuery("SELECT ISBN " +
+                                          "FROM BOOKSS " +
+                                          "ORDER BY ISBN ");
+      isbnList = query.getResultList();
+      query = manager.createNativeQuery("SELECT TITLE " +
+                                           "FROM BOOKSS " +
+                                           "ORDER BY ISBN ");
+      titleList = query.getResultList();
 
       for (int index = 0; index < bookssList.size(); index++)  {
-         System.out.println("Book " + index + ":\n" + bookssList.get(index));
+         System.out.println("Book " + index + ": " +
+                 "ISBN: " + isbnList.get(index) + "\n" +
+                 "Title: " + titleList.get(index));
       }// End of the for loop that displays a list of books
    }// End of deleteBook member method
 

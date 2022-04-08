@@ -1,0 +1,79 @@
+changes_20220407
+
+persistence.xml
+- Changed the connection details of the database
+
+For the database:
+- Name: CECS_323_01
+driver: com.mysql.cj.jdbc.Driver
+- found in persistence.xml [line 27]
+URL: jdbc:mysql://localhost:3306/BooksDB
+- found in persistence.xml [line 28]
+username: root
+- found in persistence.xml [line 29]
+password: root
+- found in persistence.xml [line 30]
+
+
+
+
+
+
+-- The Original: 
+
+<!-- MySQL Driver -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" /> -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://cecs-db01.coe.csulb.edu:3306/DATABASE?serverTimezone=UTC" /> -->
+			<property name="javax.persistence.jdbc.user" value="USERNAME" /> -->
+			<property name="javax.persistence.jdbc.password" value="PASSWORD" /> -->
+
+
+
+-- The Changed
+
+<!-- MySQL Driver -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" /> -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/BooksDB" /> -->
+			<property name="javax.persistence.jdbc.user" value="root" /> -->
+			<property name="javax.persistence.jdbc.password" value="root" /> -->
+
+
+-- Test Data for the methods
+      // addWritingGroup
+      - TestGroup
+      - tg@gmail.com
+      - 2020
+      - DavidEddings
+
+      // addIndividualWriter
+      - TestAuthor
+      - ta@gmail.com
+
+      // addAdHocTeam
+      - TFL
+      - tfl@gmail.com
+      - 2022
+
+      // addToTeam
+      - N/A
+
+      // addPublisher
+      - TestPublishingHouse
+      - main@tph.com
+      - 123-456-7890
+
+      // addBook - I would get errors when I tried to use bind variables for count
+      - TestBook
+      - 2022
+      - 0586447162
+
+      // listInfoMenu - Tested pn 20220403
+      - N/A
+
+      // deleteBook: I'm not sure why, but this method now states that the primary key is null. The fix I found was to use a Native Query
+      - 0345440781
+
+      // updateBook - I'm not sure why, but this method now states that the primary key is null. The fix I found was to use a Native Query
+
+      // listPrimaryKeys
+      - N/A

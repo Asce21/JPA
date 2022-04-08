@@ -1,4 +1,4 @@
-changes_20220402_20220403
+changes_20220402_20220403_20220404
 
 Books.java - This update is meant to address the testing / aesthetics of the program
 - Added two System.out.println(); statements at the beginning of the run for most methods
@@ -17,6 +17,9 @@ Methods Tested
 - addPublisher
 - addBook: This gives an error, but works
 - listInfoMenu(publisher's, books, Writing Groups)
+- deleteBook
+- updateBook
+- listPrimaryKeys
 
 For the database:
 URL: jdbc:derby:database/Booksdb;create=true
@@ -32,13 +35,13 @@ clearBuffer = keyboard.nextLine();
 
 -- Test Data for the methods
       // addWritingGroup
-      - Test Group
+      - TestGroup
       - tg@gmail.com
       - 2020
-      - David Eddings
+      - DavidEddings
 
       // addIndividualWriter
-      - Test Author
+      - TestAuthor
       - ta@gmail.com
 
       // addAdHocTeam
@@ -50,23 +53,25 @@ clearBuffer = keyboard.nextLine();
       - N/A
 
       // addPublisher
-      - Test Publishing House
+      - TestPublishingHouse
       - main@tph.com
       - 123-456-7890
 
-      // addBook
-      - 0586447162
-      - 2022
+      // addBook - I would get errors when I tried to use bind variables for count
       - TestBook
+      - 2022
+      - 0586447162
 
-      // listInfoMenu
+      // listInfoMenu - Tested pn 20220403
       - N/A
 
-      // deleteBook
+      // deleteBook: I'm not sure why, but this method now states that the primary key is null. The fix I found was to use a Native Query
+      - 0345440781
 
-      // updateBook
+      // updateBook - I'm not sure why, but this method now states that the primary key is null. The fix I found was to use a Native Query
 
       // listPrimaryKeys
+      - N/A
 
 
 

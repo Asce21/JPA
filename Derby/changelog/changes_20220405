@@ -1,0 +1,22 @@
+changes_20220405
+
+books.java (main)
+- Chaned native queries to bind variables
+
+publishers.java
+- Added NamedNativeQuery named sellectPunlisherByName
+
+authoring_entities.java
+- Added NamedNativeQuery named selectAuthoringEntityByEmail
+- Added NamedNativeQuery named selectAllIndividualAuthors
+- Added NamedNativeQuery named selectAllAdHocTeams
+
+
+For the database:
+URL: jdbc:derby:database/Booksdb;create=true
+- found in persistence.xml [line 22]
+username: app
+- found in persistence.xml [line 23]
+password: appSystem.out.println();
+System.out.println("Add Authoring Entity");
+- found in persistence.xml [line 24]
